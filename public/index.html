@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="brand">Test Page for fiigii</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="hero-unit row">
+                <div class="span4">
+                    <p>URL</p>
+                    <input type="text" id="url">
+
+                    <p>RESTful Fromat</p>
+                    <select name="formats" id="format">
+                        <option value=".json">JSON</option>
+                        <option value=" ">HTML</option>
+                    </select>
+
+                    <p>
+                        Arguments
+                        <button class="btn btn-danger" id="clear_button">Clear</button>
+                    </p>
+                    <textarea rows="5" id="arguments"></textarea>
+                    
+                    <p>Method</p>
+                    <select name="methods" id="method">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+
+                    <button id="send" class="btn btn-large btn-primary">Send</button>
+                    
+                </div>
+
+                <div class="span5">
+                    <p>Response</p>
+                    <textarea rows="20" class="input-block-level" id="show"></textarea>
+                </div>
+
+                <div class="span5 offset4 control-group error">
+                    <p>Error</p>
+                    <textarea rows="3" class="input-block-level" id="error_show"></textarea>
+                </div>    
+                
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="container">
+                <p class="muted credit">Test Page for fiigii by Ajax, 2013</p>
+            </div>
+        </div>
+        
+
+        <script src="js/vendor/jquery-1.9.1.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+</html>
