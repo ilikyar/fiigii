@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  descript        :text
+#  url             :string(255)
+#  gender          :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  refresh_at      :datetime         default(2013-04-19 02:16:01 UTC)
+#
+
 class User < ActiveRecord::Base
   attr_accessible :admin, :descript, :email, :gender, :name, :password,:password_confirmation, :url, :refresh_at
   has_secure_password
@@ -20,7 +38,7 @@ class User < ActiveRecord::Base
   has_many :topics, through: :interests
 
   before_save { email.downcase! }
-  before_save :create_remember_token
+  before_create :create_remember_token
 
   validates :name, length: { maximum: 50 }
 
@@ -31,11 +49,15 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :gender, inclusion: { :in => ["m", "f", ""], :message => "Must be m or f"}
 
-  default_scope order: 'users.refresh_at DESC'
+  #default_scope order: 'users.refresh_at DESC'
+
+  def reset
+    self.update_attribute(:refresh_at, 1.weeks.ago)
+  end
 
   def friends_timeline
     result = Status.from_users_followed_by(self)
-    # self.update_attribute(:refresh_at, Time.now)
+    self.update_attribute(:refresh_at, Time.now)
     result
   end
 

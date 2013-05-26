@@ -1,6 +1,6 @@
 class StatusesController < ApplicationController
-  before_filter :signed_in_user, 
-                only: [:create, :update, :destroy]
+  #before_filter :signed_in_user, 
+  #              only: [:create, :update, :destroy]
 
   # GET /statuses
   # GET /statuses.json
@@ -44,7 +44,6 @@ class StatusesController < ApplicationController
   # POST /statuses.json
   def create
     json_data = params[:status]
-    puts "\n\n\n#{json_data}\n\n\n"
     if json_data && json_data[:content]
       @status = Status.new(content: json_data[:content])
       if json_data[:topics]

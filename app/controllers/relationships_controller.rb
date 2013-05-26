@@ -8,7 +8,7 @@ class RelationshipsController < ApplicationController
     current_user.follow!(@user)
 
     respond_to do |format|
-      format.json { render json: @user.as_json(current_user) }
+      format.json { render json: @user.as_json(user: current_user) }
     end
   end
 

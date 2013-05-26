@@ -10,11 +10,13 @@ namespace :db do
 
 	desc "Fill new Posts"
 	task :add_new => :environment do
-		user = User.find(1)
-		10.times do |n|
-			content = Faker::Lorem.sentence(5) * 20
+	users = User.all
+	users.each do |user|
+		1.times do |n|
+			content = Faker::Lorem.sentence(5) * [20, 15, 3].shuffle.first
 			user.statuses.create!(content: content)
 		end
+	end
 	end
 end
 
@@ -80,9 +82,11 @@ end
 
 def good_and_down
 	users = User.all(limit: 50)
-	status = Status.first
+	statuses = (Status.all(limit: 200).shuffle)[0..100]
 	users.each do |user|
-		status.good! users
-		status.bad! users
+		statuses.each do |status|
+			status.good! user
+			status.bad! user
+		end
 	end
 end

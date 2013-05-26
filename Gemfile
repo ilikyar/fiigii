@@ -4,6 +4,7 @@ gem 'rails', '3.2.13.rc1'
 gem 'bcrypt-ruby', '>= 3.0.1'
 gem "rails-erd", ">= 1.1.0"
 gem 'faker'
+gem 'rename'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,6 +15,7 @@ group :development, :test do
   gem 'guard-rspec', '>= 1.2.1'
   gem 'guard-spork', '>= 1.2.0'  
   gem 'spork', '>= 0.9.2'
+  gem 'annotate'
 end
 
 

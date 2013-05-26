@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @comments.as_json(current_user) }
+      format.json { render json: @comments.as_json(user: current_user) }
     end
   end
 
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @comment.as_json(current_user) }
+      format.json { render json: @comment.as_json(user: current_user) }
     end
   end
 
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @comment.as_json(current_user) }
+      format.json { render json: @comment.as_json(user: current_user) }
     end
   end
 
@@ -41,12 +41,13 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
+    @status = Status.find(params[:comment][:status_id])
 
     respond_to do |format|
-      if @comment.save
-        current_user.statuses << @comment
+      if @status && @comment.save
+        current_user.comments << @comment
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment.as_json(current_user), status: :created, location: @comment }
+        format.json { render json: @comment.as_json(user: current_user), status: :created, location: @comment }
       else
         format.html { render action: "new" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
@@ -61,7 +62,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment.as_json(current_user), notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @comment.as_json(user: current_user), notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

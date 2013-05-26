@@ -28,8 +28,7 @@ module SessionHelper
   def signed_in_user
     unless signed_in?
     	respond_to do |format|
-    		format.json { render json: default_error("Plase Login") }
-    		format.html { render json: default_error("Plase Login")}
+    		format.json { render json: default_error("Plase Login"), status: :unprocessable_entity }
     	end
     end
   end

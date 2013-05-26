@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: statuses
+#
+#  id           :integer          not null, primary key
+#  content      :text
+#  retweeted_id :integer
+#  user_id      :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class Status < ActiveRecord::Base
   attr_accessible :content, :retweeted_id, :user_id
 
@@ -28,7 +40,7 @@ class Status < ActiveRecord::Base
     followed_user_ids = "SELECT followed_id FROM relationships
                          WHERE follower_id = :user_id"
     where("(created_at > :refresh_at) AND (user_id IN (#{followed_user_ids}) OR user_id = :user_id)", 
-          user_id: user.id, refresh_at: user.refresh_at).limit(50)
+          user_id: user.id, refresh_at: user.refresh_at).limit(100)
   end
 
   def good_count
@@ -57,7 +69,7 @@ class Status < ActiveRecord::Base
   	{
   		id: self.id,
   		content: self.content,
-  		favourites: is_favorited,
+  		favourited: is_favorited,
   		topics: self.topics,
   		reposts_count: self.retweets.count,
   		comments_count: self.comments.count,
@@ -65,7 +77,7 @@ class Status < ActiveRecord::Base
   		bad_count: self.bad_count,
       created_at: self.created_at,
   		user: User.find_by_id(self.user.id).as_json(options),
-  		retweeted_status: retweeted_status.as_json(without_retweet: true)
+  		retweeted_status: retweeted_status.as_json(without_retweet: true, user: options[:user])
   	}
   end
 end

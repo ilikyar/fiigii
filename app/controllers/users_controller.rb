@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-=begin  
+#=begin  
   before_filter :signed_in_user, 
                 only: [ :update, :destroy, :following, :followers,
                  :friends_timeline, :timeline, :reset, :favourites]
   before_filter :correct_user,   only: [:update, :destroy, :friends_timeline, :reset]
-=end
+#=end
   # GET /users
   # GET /users.json
   def index
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     respond_to do |format|
       if @user
-        @user.update_attribute(:refresh_at, 1.weeks.ago)
+        @user.reset
         format.json { render json: @user.as_json(user: current_user) }
       else
         format.json { render json: @user.errors, status: :unprocessable_entity }
