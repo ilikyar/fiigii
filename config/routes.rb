@@ -1,4 +1,8 @@
 Fiigii::Application.routes.draw do
+  post "search/user_search"
+
+  post "search/status_search"
+
   resources :interests
 
 
