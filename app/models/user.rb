@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
 
   def friends_timeline
     result = Status.from_users_followed_by(self)
-    self.update_attribute(:refresh_at, Time.now)
+    # self.update_attribute(:refresh_at, Time.now)
     result
   end
 
